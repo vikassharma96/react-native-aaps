@@ -5,5 +5,5 @@ React Native is like React, but it uses native components instead of web compone
 
 ReactJs - A javascript library for building user interfaces. ReactDOM.render() adds the web support. React itself a platform agnostic.
 
-<img src="https://github.com/vikassharma96/react-native-aaps/blob/main/app/assets/images/1.png" width="700" height="500"/>
-<img src="https://github.com/vikassharma96/react-native-aaps/blob/main/app/assets/images/2.png" width="700" height="500"/>
+<img src="https://github.com/vikassharma96/react-native-aaps/blob/main/app/assets/images/1.png"/>
+<img src="https://github.com/vikassharma96/react-native-aaps/blob/main/app/assets/images/2.png"/>
