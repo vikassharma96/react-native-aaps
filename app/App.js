@@ -1,60 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import {Platform, StatusBar, StyleSheet, View} from 'react-native';
-
+import 'react-native-gesture-handler';
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {ThemeContext, themes} from './config/theme-context';
+import MealsNavigator from './navigation/MealsNavigator';
+import {useEffect} from 'react/cjs/react.development';
 import SplashScreen from 'react-native-splash-screen';
-import Header from './components/Header';
-import StartGameScreen from './screens/StartGameScreen';
-import GameScreen from './screens/GameScreen';
-import GameOverScreen from './screens/GameOverScreen';
+import MealsFavTabNavigator from './navigation/MealsFavTabNavigator';
 
 export default function App() {
-  const [userNumber, setUserNumber] = useState();
-  const [guessRounds, setGuessRounds] = useState(0);
-
   useEffect(() => {
     SplashScreen.hide();
   });
 
-  const configureNewGameHandler = () => {
-    setGuessRounds(0);
-    setUserNumber(null);
-  };
-
-  const startGameHandler = (selectedNumber) => {
-    setUserNumber(selectedNumber);
-  };
-
-  const gameOverHandler = (numOfRounds) => {
-    setGuessRounds(numOfRounds);
-  };
-
-  let content = <StartGameScreen onStartGame={startGameHandler} />;
-
-  if (userNumber && guessRounds <= 0) {
-    content = (
-      <GameScreen userChoice={userNumber} onGameOver={gameOverHandler} />
-    );
-  } else if (guessRounds > 0) {
-    content = (
-      <GameOverScreen
-        roundsNumber={guessRounds}
-        userNumber={userNumber}
-        onRestart={configureNewGameHandler}
-      />
-    );
-  }
-
   return (
-    <View style={styles.screen}>
-      {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
-      <Header title="Guess a Number" />
-      {content}
-    </View>
+    <ThemeContext.Provider value={themes.light}>
+      <NavigationContainer>
+        <MealsFavTabNavigator />
+      </NavigationContainer>
+    </ThemeContext.Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-  },
-});
