@@ -1,9 +1,5 @@
 ### React Native
 
-React Native is an open-source mobile application framework created by Facebook, Inc. It is used to develop applications for Android, Android TV, iOS, macOS, tvOS, Web, Windows and UWP by enabling developers to use React's framework along with native platform capabilities.
-React Native is like React, but it uses native components instead of web components as building blocks.
-
-ReactJs - A javascript library for building user interfaces. ReactDOM.render() adds the web support. React itself a platform agnostic.
-
-<img src="https://github.com/vikassharma96/react-native-aaps/blob/main/app/assets/images/1.png"/>
-<img src="https://github.com/vikassharma96/react-native-aaps/blob/main/app/assets/images/2.png"/>
+For custom fonts - create react-native.config.js file and run react-native link
+UseRef - hook that allows us to create an object which we can bind to inputs to get access to them in the code. It allows us to define a value which survives component re-renders.
+Dimensions - It's a great API for finding out how many pixels you have available on the width and on the height on the device or running on and that's important, where percentage here always refers to the direct parent view and not always to the available width of the device.
