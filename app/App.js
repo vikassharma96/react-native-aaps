@@ -1,5 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Platform, StatusBar, StyleSheet, View} from 'react-native';
+import {
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  View,
+} from 'react-native';
 
 import SplashScreen from 'react-native-splash-screen';
 import Header from './components/Header';
@@ -45,11 +51,11 @@ export default function App() {
   }
 
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen}>
       {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
       <Header title="Guess a Number" />
       {content}
-    </View>
+    </SafeAreaView>
   );
 }
 
