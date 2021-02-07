@@ -5,4 +5,3 @@ use navigation.push() when want to navigate to the same page which is not possib
 goBack() - to go back
 popToTop() - go back to the first screen in the stack
 replace - replace current
-
