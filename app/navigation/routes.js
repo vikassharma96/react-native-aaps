@@ -4,4 +4,5 @@ export default Object.freeze({
   MealDetail: 'MealDetail',
   Meals: 'Meals',
   Favorites: 'Favorites',
+  FavoritesScreen: 'FavoritesScreen',
 });
