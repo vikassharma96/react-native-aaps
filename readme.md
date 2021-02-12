@@ -9,3 +9,4 @@ Passing data between components and navigation options using setparams and getpa
 useEffect, useCallback, useLayoutEffect
 useCallback - this allows us to wrap a function so that this function is actually cached by React and is only recreated if its dependencies changed. only updates when state changes.
 state management with redux
+<img src="https://github.com/vikassharma96/react-native-aaps/blob/main/app/assets/images/redux.png"/>
