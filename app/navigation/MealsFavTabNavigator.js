@@ -1,13 +1,13 @@
 import React from 'react';
-import {Platform, View} from 'react-native';
+import {Platform, Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import MealsNavigator from './MealsNavigator';
-import FavoritesScreen from '../screens/FavoritesScreen';
 import routes from './routes';
 import colors from '../config/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FavNavigator from './FavNavigator';
+import strings from '../config/strings';
 
 const Tab =
   Platform.OS === 'android'
@@ -22,6 +22,9 @@ const tabProps = Platform.select({
   ios: {
     tabBarOptions: {
       activeTintColor: colors.accentColor,
+      labelStyle: {
+        fontFamily: strings.semiBold,
+      },
     },
   },
 });
@@ -44,6 +47,12 @@ const MealsFavTabNavigator = () => {
             <MaterialCommunityIcons color={color} size={24} name="food" />
           ),
           tabBarColor: colors.accentColor,
+          tabBarLabel:
+            Platform.OS === 'android' ? (
+              <Text style={{fontFamily: strings.semiBold}}>Meals</Text>
+            ) : (
+              'Meals'
+            ),
         })}
       />
       <Tab.Screen
@@ -54,6 +63,12 @@ const MealsFavTabNavigator = () => {
             <MaterialCommunityIcons color={color} size={24} name="heart" />
           ),
           tabBarColor: colors.primaryColor,
+          tabBarLabel:
+            Platform.OS === 'android' ? (
+              <Text style={{fontFamily: strings.semiBold}}>Favorites</Text>
+            ) : (
+              'Favorites'
+            ),
         })}
       />
     </Tab.Navigator>

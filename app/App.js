@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {ThemeContext, themes} from './config/theme-context';
 import {useEffect} from 'react/cjs/react.development';
 import SplashScreen from 'react-native-splash-screen';
-import MealsFavTabNavigator from './navigation/MealsFavTabNavigator';
+import MainNavigator from './navigation/MainNavigator';
 
 export default function App() {
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function App() {
   return (
     <ThemeContext.Provider value={themes.light}>
       <NavigationContainer>
-        <MealsFavTabNavigator />
+        <MainNavigator />
       </NavigationContainer>
     </ThemeContext.Provider>
   );

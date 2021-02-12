@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
+import {FlatList} from 'react-native';
 
 import routes from '../navigation/routes';
 import {CATEGORIES} from '../data/dummy-data';
@@ -30,17 +30,5 @@ const CategoriesScreen = (props) => {
     />
   );
 };
-
-CategoriesScreen.navigationOptions = {
-  headerTitle: 'Meal Categories',
-};
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default CategoriesScreen;
