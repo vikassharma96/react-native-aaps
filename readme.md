@@ -12,5 +12,7 @@ useEffect, useCallback, useLayoutEffect
 useCallback - this allows us to wrap a function so that this function is actually cached by React and is only recreated if its dependencies changed. only updates when state changes.
 redux data and navigation options
 state management with redux
-<img src="https://github.com/vikassharma96/react-native-aaps/blob/main/app/assets/images/redux.png"/>
+
+<img src="https://github.com/vikassharma96/react-native-aaps/blob/meals-app/app/assets/images/redux.png" />
+
 Optimize memory usage and performance using react-native-screens
