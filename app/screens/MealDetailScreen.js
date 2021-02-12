@@ -1,4 +1,4 @@
-import React, {useLayoutEffect} from 'react';
+import React, {useCallback, useLayoutEffect} from 'react';
 import {
   ScrollView,
   View,
@@ -9,8 +9,9 @@ import {
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DefaultText from '../components/DefaultText';
-
-import {MEALS} from '../data/dummy-data';
+import {useSelector, useDispatch} from 'react-redux';
+import {toggleFavorite} from '../store/actions/meals';
+import colors from '../config/colors';
 
 const ListItem = (props) => {
   return (
@@ -24,7 +25,19 @@ const MealDetailScreen = (props) => {
   const {route, navigation} = props;
   const mealId = route.params?.mealId;
 
-  const selectedMeal = MEALS.find((meal) => meal.id === mealId);
+  const availableMeals = useSelector((state) => state.meals.meals);
+
+  const selectedMeal = availableMeals.find((meal) => meal.id === mealId);
+
+  const currentMealIsFavorite = useSelector((state) =>
+    state.meals.favoriteMeals.some((meal) => meal.id === mealId),
+  );
+
+  const dispatch = useDispatch();
+
+  const toggleFavoriteHandler = useCallback(() => {
+    dispatch(toggleFavorite(mealId));
+  }, [dispatch, mealId]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -32,12 +45,16 @@ const MealDetailScreen = (props) => {
       headerRight: () => (
         <TouchableOpacity
           style={{marginEnd: 10}}
-          onPress={() => console.log('favorite')}>
-          <MaterialCommunityIcons color="white" size={24} name="heart" />
+          onPress={toggleFavoriteHandler}>
+          <MaterialCommunityIcons
+            color={currentMealIsFavorite ? colors.primaryColor : colors.white}
+            size={24}
+            name="heart"
+          />
         </TouchableOpacity>
       ),
     });
-  }, [navigation, selectedMeal]);
+  }, [currentMealIsFavorite, navigation, selectedMeal, toggleFavoriteHandler]);
 
   return (
     <ScrollView>

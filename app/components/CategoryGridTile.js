@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: strings.bold,
-    fontSize: 22,
+    fontSize: 20,
     textAlign: 'right',
   },
 });

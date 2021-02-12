@@ -3,7 +3,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import routes from './routes';
 import MealDetailScreen from '../screens/MealDetailScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
-import {Platform} from 'react-native';
+import {Platform, TouchableOpacity} from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../config/colors';
 
 const Stack = createStackNavigator();
@@ -22,7 +23,20 @@ const FavNavigator = (props) => {
           fontWeight: 'bold',
         },
       }}>
-      <Stack.Screen name={routes.FavoritesScreen} component={FavoritesScreen} />
+      <Stack.Screen
+        name={routes.FavoritesScreen}
+        component={FavoritesScreen}
+        options={{
+          headerTitle: 'Meal Categories',
+          headerLeft: () => (
+            <TouchableOpacity
+              style={{marginStart: 10}}
+              onPress={() => props.navigation.toggleDrawer()}>
+              <MaterialCommunityIcons color="white" size={24} name="menu" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
       <Stack.Screen name={routes.MealDetail} component={MealDetailScreen} />
     </Stack.Navigator>
   );

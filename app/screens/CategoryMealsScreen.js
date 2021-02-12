@@ -1,10 +1,10 @@
 import React, {useLayoutEffect} from 'react';
-import {View, Text, FlatList, StyleSheet} from 'react-native';
 
-import {CATEGORIES, MEALS} from '../data/dummy-data';
-import MealItem from '../components/MealItem';
-import routes from '../navigation/routes';
+import {CATEGORIES} from '../data/dummy-data';
 import MealList from '../components/MealList';
+import {useSelector} from 'react-redux';
+import {StyleSheet, View} from 'react-native';
+import DefaultText from '../components/DefaultText';
 
 const CategoryMealScreen = (props) => {
   const {navigation, route} = props;
@@ -18,19 +18,28 @@ const CategoryMealScreen = (props) => {
     });
   }, [navigation, selectedCategory.title]);
 
-  const displayedMeals = MEALS.filter(
+  const availableMeals = useSelector((state) => state.meals.filteredMeals);
+
+  const displayedMeals = availableMeals.filter(
     (meal) => meal.categoryIds.indexOf(catId) >= 0,
   );
+
+  if (displayedMeals.length === 0) {
+    return (
+      <View style={styles.content}>
+        <DefaultText>No meals found, maybe check your filters?</DefaultText>
+      </View>
+    );
+  }
 
   return <MealList listData={displayedMeals} navigation={navigation} />;
 };
 
 const styles = StyleSheet.create({
-  screen: {
+  content: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 15,
   },
 });
 
