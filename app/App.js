@@ -4,15 +4,20 @@ import {NavigationContainer} from '@react-navigation/native';
 import {ThemeContext, themes} from './config/theme-context';
 import {enableScreens} from 'react-native-screens';
 import SplashScreen from 'react-native-splash-screen';
-import MainNavigator from './navigation/MainNavigator';
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
-import mealsReducer from './store/reducers/meals';
+
+import cartReducer from './store/reducers/cart';
+import ordersReducer from './store/reducers/orders';
+import productsReducer from './store/reducers/products';
+import ShopNavigator from './navigation/ShopNavigator';
 
 enableScreens();
 
 const rootReducer = combineReducers({
-  meals: mealsReducer,
+  products: productsReducer,
+  cart: cartReducer,
+  orders: ordersReducer,
 });
 
 const store = createStore(rootReducer);
@@ -26,7 +31,7 @@ export default function App() {
     <Provider store={store}>
       <ThemeContext.Provider value={themes.light}>
         <NavigationContainer>
-          <MainNavigator />
+          <ShopNavigator />
         </NavigationContainer>
       </ThemeContext.Provider>
     </Provider>

@@ -1,6 +1,6 @@
 export default {
-  primaryColor: '#f4511e',
-  accentColor: '#c717fc',
+  primary: '#C2185B',
+  accent: '#FFC107',
   white: '#fff',
   grey: '#A9A9A9',
 };
