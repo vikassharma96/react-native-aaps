@@ -52,9 +52,11 @@ const styles = StyleSheet.create({
   mainText: {
     fontFamily: strings.bold,
     fontSize: 16,
+    maxWidth: '70%',
+    flexShrink: 1,
   },
   deleteButton: {
-    marginLeft: 20,
+    marginLeft: 10,
   },
 });
 

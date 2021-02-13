@@ -8,6 +8,7 @@ import Card from '../../components/UI/Card';
 import * as cartActions from '../../store/actions/cart';
 import * as ordersActions from '../../store/actions/orders';
 import strings from '../../config/strings';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const CartScreen = (props) => {
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
@@ -37,14 +38,29 @@ const CartScreen = (props) => {
             ${Math.round(cartTotalAmount.toFixed(2) * 100) / 100}
           </Text>
         </Text>
-        <Button
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={[
+            styles.button,
+            {
+              backgroundColor:
+                cartItems.length === 0 ? Colors.grey : Colors.accent,
+            },
+          ]}
+          disabled={cartItems.length === 0}
+          onPress={() => {
+            dispatch(ordersActions.addOrder(cartItems, cartTotalAmount));
+          }}>
+          <Text style={styles.text}>Order Now</Text>
+        </TouchableOpacity>
+        {/* <Button
           color={Colors.accent}
           title="Order Now"
           disabled={cartItems.length === 0}
           onPress={() => {
             dispatch(ordersActions.addOrder(cartItems, cartTotalAmount));
           }}
-        />
+        /> */}
       </Card>
       <FlatList
         data={cartItems}
@@ -82,6 +98,18 @@ const styles = StyleSheet.create({
   },
   amount: {
     color: Colors.primary,
+  },
+  button: {
+    backgroundColor: Colors.accent,
+    borderRadius: 4,
+  },
+  text: {
+    paddingStart: 8,
+    paddingEnd: 8,
+    paddingTop: 6,
+    paddingBottom: 6,
+    color: Colors.white,
+    fontFamily: strings.semiBold,
   },
 });
 
