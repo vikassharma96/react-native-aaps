@@ -1,5 +1,12 @@
 import React, {useLayoutEffect} from 'react';
-import {FlatList, Button, Platform} from 'react-native';
+import {
+  FlatList,
+  Button,
+  Platform,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 
@@ -7,6 +14,7 @@ import HeaderButton from '../../components/UI/HeaderButton';
 import ProductItem from '../../components/shop/ProductItem';
 import * as cartActions from '../../store/actions/cart';
 import Colors from '../../config/colors';
+import strings from '../../config/strings';
 
 const ProductsOverviewScreen = (props) => {
   const {route, navigation} = props;
@@ -60,24 +68,41 @@ const ProductsOverviewScreen = (props) => {
           onSelect={() => {
             selectItemHandler(itemData.item.id, itemData.item.title);
           }}>
-          <Button
-            color={Colors.primary}
-            title="View Details"
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={styles.button}
             onPress={() => {
               selectItemHandler(itemData.item.id, itemData.item.title);
-            }}
-          />
-          <Button
-            color={Colors.primary}
-            title="To Cart"
+            }}>
+            <Text style={styles.text}>View Details</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={styles.button}
             onPress={() => {
               dispatch(cartActions.addToCart(itemData.item));
-            }}
-          />
+            }}>
+            <Text style={styles.text}>To Cart</Text>
+          </TouchableOpacity>
         </ProductItem>
       )}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: Colors.primary,
+    borderRadius: 4,
+  },
+  text: {
+    paddingStart: 8,
+    paddingEnd: 8,
+    paddingTop: 6,
+    paddingBottom: 6,
+    color: Colors.white,
+    fontFamily: strings.semiBold,
+  },
+});
 
 export default ProductsOverviewScreen;

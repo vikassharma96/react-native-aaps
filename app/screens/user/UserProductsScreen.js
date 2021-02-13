@@ -1,5 +1,12 @@
 import React, {useLayoutEffect} from 'react';
-import {FlatList, Button, Platform, Alert} from 'react-native';
+import {
+  FlatList,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Platform,
+  Alert,
+} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 
@@ -7,6 +14,7 @@ import HeaderButton from '../../components/UI/HeaderButton';
 import ProductItem from '../../components/shop/ProductItem';
 import Colors from '../../config/colors';
 import * as productsActions from '../../store/actions/products';
+import strings from '../../config/strings';
 
 const UserProductsScreen = (props) => {
   const {navigation} = props;
@@ -74,22 +82,39 @@ const UserProductsScreen = (props) => {
           onSelect={() => {
             editProductHandler(itemData.item.id);
           }}>
-          <Button
-            color={Colors.primary}
-            title="Edit"
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={styles.button}
             onPress={() => {
               editProductHandler(itemData.item.id);
-            }}
-          />
-          <Button
-            color={Colors.primary}
-            title="Delete"
-            onPress={deleteHandler.bind(this, itemData.item.id)}
-          />
+            }}>
+            <Text style={styles.text}>Edit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={styles.button}
+            onPress={deleteHandler.bind(this, itemData.item.id)}>
+            <Text style={styles.text}>Delete</Text>
+          </TouchableOpacity>
         </ProductItem>
       )}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: Colors.primary,
+    borderRadius: 4,
+  },
+  text: {
+    paddingStart: 8,
+    paddingEnd: 8,
+    paddingTop: 6,
+    paddingBottom: 6,
+    color: Colors.white,
+    fontFamily: strings.semiBold,
+  },
+});
 
 export default UserProductsScreen;

@@ -16,7 +16,7 @@ import * as productsActions from '../../store/actions/products';
 
 const EditProductScreen = (props) => {
   const {route, navigation} = props;
-  const prodId = route.params.productId;
+  const prodId = route.params?.productId;
   const editedProduct = useSelector((state) =>
     state.products.userProducts.find((prod) => prod.id === prodId),
   );
@@ -31,25 +31,6 @@ const EditProductScreen = (props) => {
     editedProduct ? editedProduct.description : '',
   );
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerTitle: route.params.productId ? 'Edit Product' : 'Add Product',
-      headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={HeaderButton}>
-          <Item
-            title="Save"
-            iconName={
-              Platform.OS === 'android'
-                ? 'checkbox-marked-circle-outline'
-                : 'checkbox-marked-circle-outline'
-            }
-            onPress={route.params?.submitFn}
-          />
-        </HeaderButtons>
-      ),
-    });
-  }, [navigation, route.params.productId, route.params.submitFn]);
-
   const submitHandler = useCallback(() => {
     if (editedProduct) {
       dispatch(
@@ -63,9 +44,28 @@ const EditProductScreen = (props) => {
     navigation.goBack();
   }, [dispatch, prodId, title, description, imageUrl, price]);
 
-  useEffect(() => {
-    navigation.setParams({submit: submitHandler});
-  }, [submitHandler]);
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: route.params?.productId ? 'Edit Product' : 'Add Product',
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+          <Item
+            title="Save"
+            iconName={
+              Platform.OS === 'android'
+                ? 'checkbox-marked-circle-outline'
+                : 'checkbox-marked-circle-outline'
+            }
+            onPress={description && imageUrl && price ? submitHandler : null}
+          />
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation, route.params, submitHandler]);
+
+  // useEffect(() => {
+  //   navigation.setParams({submit: submitHandler});
+  // }, [submitHandler]);
 
   return (
     <ScrollView>
@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderBottomColor: '#ccc',
     borderBottomWidth: 1,
+    fontFamily: strings.medium,
   },
 });
 
