@@ -79,7 +79,7 @@ export const OrdersNavigator = (props) => {
 
 const AdminStackNavigator = createStackNavigator();
 
-const AdminNavigator = () => {
+export const AdminNavigator = () => {
   return (
     <AdminStackNavigator.Navigator screenOptions={defaultNavOptions}>
       <AdminStackNavigator.Screen
@@ -96,13 +96,13 @@ const AdminNavigator = () => {
   );
 };
 
-const Drawer = createDrawerNavigator();
+const ShopDrawerNavigator = createDrawerNavigator();
 
 export const ShopNavigator = () => {
   const dispatch = useDispatch();
 
   return (
-    <Drawer.Navigator
+    <ShopDrawerNavigator.Navigator
       drawerContent={(props) => {
         return (
           <View style={{flex: 1, paddingTop: 20}}>
@@ -123,7 +123,7 @@ export const ShopNavigator = () => {
       drawerContentOptions={{
         activeTintColor: colors.primary,
       }}>
-      <Drawer.Screen
+      <ShopDrawerNavigator.Screen
         name="Products"
         component={ProductsNavigator}
         options={{
@@ -133,11 +133,10 @@ export const ShopNavigator = () => {
           ),
         }}
       />
-      <Drawer.Screen
+      <ShopDrawerNavigator.Screen
         name="Orders"
         component={OrdersNavigator}
         options={{
-          drawerLabel: 'Orders',
           drawerIcon: ({color, size}) => (
             <MaterialCommunityIcons
               color={color}
@@ -147,7 +146,7 @@ export const ShopNavigator = () => {
           ),
         }}
       />
-      <Drawer.Screen
+      <ShopDrawerNavigator.Screen
         name="Admin"
         component={AdminNavigator}
         options={{
@@ -161,7 +160,7 @@ export const ShopNavigator = () => {
           ),
         }}
       />
-    </Drawer.Navigator>
+    </ShopDrawerNavigator.Navigator>
   );
 };
 
