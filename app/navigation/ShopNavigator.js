@@ -2,6 +2,7 @@ import React from 'react';
 import {Platform} from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen';
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
 import CartScreen from '../screens/shop/CartScreen';
@@ -91,17 +92,40 @@ const ShopNavigator = () => {
       <Drawer.Screen
         name="Products"
         component={ProductsNavigator}
-        options={{drawerLabel: 'Products'}}
+        options={{
+          drawerLabel: 'Products',
+          drawerIcon: ({color, size}) => (
+            <MaterialCommunityIcons color={color} name="cart" size={size} />
+          ),
+        }}
       />
       <Drawer.Screen
         name="Orders"
         component={OrdersNavigator}
-        options={{drawerLabel: 'Orders'}}
+        options={{
+          drawerLabel: 'Orders',
+          drawerIcon: ({color, size}) => (
+            <MaterialCommunityIcons
+              color={color}
+              name="clipboard-list-outline"
+              size={size}
+            />
+          ),
+        }}
       />
       <Drawer.Screen
         name="Admin"
         component={AdminNavigator}
-        options={{drawerLabel: 'Admin'}}
+        options={{
+          drawerLabel: 'Admin',
+          drawerIcon: ({color, size}) => (
+            <MaterialCommunityIcons
+              color={color}
+              name="tooltip-plus-outline"
+              size={size}
+            />
+          ),
+        }}
       />
     </Drawer.Navigator>
   );
