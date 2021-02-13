@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderBottomColor: '#ccc',
     borderBottomWidth: 1,
+    fontFamily: strings.regular,
   },
   errorContainer: {
     marginVertical: 5,

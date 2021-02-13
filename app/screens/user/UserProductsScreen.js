@@ -1,4 +1,4 @@
-import React, {useLayoutEffect} from 'react';
+import React from 'react';
 import {
   FlatList,
   Text,
@@ -17,41 +17,8 @@ import * as productsActions from '../../store/actions/products';
 import strings from '../../config/strings';
 
 const UserProductsScreen = (props) => {
-  const {navigation} = props;
   const userProducts = useSelector((state) => state.products.userProducts);
   const dispatch = useDispatch();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerTitle: 'Your Products',
-      headerLeft: () => (
-        <HeaderButtons HeaderButtonComponent={HeaderButton}>
-          <Item
-            title="Menu"
-            iconName={Platform.OS === 'android' ? 'menu' : 'menu'}
-            onPress={() => {
-              navigation.toggleDrawer();
-            }}
-          />
-        </HeaderButtons>
-      ),
-      headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={HeaderButton}>
-          <Item
-            title="Add"
-            iconName={
-              Platform.OS === 'android'
-                ? 'tooltip-plus-outline'
-                : 'tooltip-plus-outline'
-            }
-            onPress={() => {
-              navigation.navigate('EditProduct');
-            }}
-          />
-        </HeaderButtons>
-      ),
-    });
-  }, [navigation]);
 
   const editProductHandler = (id) => {
     props.navigation.navigate('EditProduct', {productId: id});
@@ -100,6 +67,38 @@ const UserProductsScreen = (props) => {
       )}
     />
   );
+};
+
+export const screenOptions = (navData) => {
+  return {
+    headerTitle: 'Your Products',
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Menu"
+          iconName={Platform.OS === 'android' ? 'menu' : 'menu'}
+          onPress={() => {
+            navData.navigation.toggleDrawer();
+          }}
+        />
+      </HeaderButtons>
+    ),
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Add"
+          iconName={
+            Platform.OS === 'android'
+              ? 'tooltip-plus-outline'
+              : 'tooltip-plus-outline'
+          }
+          onPress={() => {
+            navData.navigation.navigate('EditProduct');
+          }}
+        />
+      </HeaderButtons>
+    ),
+  };
 };
 
 const styles = StyleSheet.create({

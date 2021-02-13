@@ -16,3 +16,5 @@ state management with redux
 <img src="https://github.com/vikassharma96/react-native-aaps/blob/meals-app/app/assets/images/redux.png" />
 
 Optimize memory usage and performance using react-native-screens
+screens which we go to with the drawer are actually all kept in memory so to say, they're not recreated and It's a different thing for stack navigation it's recreated
+put will update the entire data patch will update at particular field
