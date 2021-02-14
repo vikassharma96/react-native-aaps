@@ -1,9 +1,20 @@
 ### React Native
 
-React Native is an open-source mobile application framework created by Facebook, Inc. It is used to develop applications for Android, Android TV, iOS, macOS, tvOS, Web, Windows and UWP by enabling developers to use React's framework along with native platform capabilities.
-React Native is like React, but it uses native components instead of web components as building blocks.
+React Navigation V5 -
+use navigation.push() when want to navigate to the same page which is not possible with navigation.navigate()
+goBack() - to go back
+popToTop() - go back to the first screen in the stack
+replace - replace current
+Passing data between components and navigation options using setparams and getparams
+Header interaction with its screen component
+https://reactnavigation.org/docs/header-buttons/#header-interaction-with-its-screen-component
+useEffect, useCallback, useLayoutEffect
+useCallback - this allows us to wrap a function so that this function is actually cached by React and is only recreated if its dependencies changed. only updates when state changes.
+redux data and navigation options
+state management with redux
 
-ReactJs - A javascript library for building user interfaces. ReactDOM.render() adds the web support. React itself a platform agnostic.
+<img src="https://github.com/vikassharma96/react-native-aaps/blob/meals-app/app/assets/images/redux.png" />
 
-<img src="https://github.com/vikassharma96/react-native-aaps/blob/main/app/assets/images/1.png"/>
-<img src="https://github.com/vikassharma96/react-native-aaps/blob/main/app/assets/images/2.png"/>
+Optimize memory usage and performance using react-native-screens
+screens which we go to with the drawer are actually all kept in memory so to say, they're not recreated and It's a different thing for stack navigation it's recreated
+put will update the entire data patch will update at particular field
