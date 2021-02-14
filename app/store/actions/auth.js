@@ -1,4 +1,4 @@
-import {AsyncStorage} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // export const SIGNUP = 'SIGNUP';
 // export const LOGIN = 'LOGIN';
@@ -22,7 +22,7 @@ export const authenticate = (userId, token, expiryTime) => {
 export const signup = (email, password) => {
   return async (dispatch) => {
     const response = await fetch(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAwgME943HeTkyX9QJak260PNbYZfQI58Q',
+      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBlYXi36xpTE-3jFYx8PWIpcUXGD39JCes',
       {
         method: 'POST',
         headers: {
@@ -38,10 +38,12 @@ export const signup = (email, password) => {
 
     if (!response.ok) {
       const errorResData = await response.json();
+      console.log(errorResData);
       const errorId = errorResData.error.message;
+      const errorCode = errorResData.error.code;
       let message = 'Something went wrong!';
-      if (errorId === 'EMAIL_EXISTS') {
-        message = 'This email exists already!';
+      if (errorCode === 400) {
+        message = errorId;
       }
       throw new Error(message);
     }
@@ -65,7 +67,7 @@ export const signup = (email, password) => {
 export const login = (email, password) => {
   return async (dispatch) => {
     const response = await fetch(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAwgME943HeTkyX9QJak260PNbYZfQI58Q',
+      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBlYXi36xpTE-3jFYx8PWIpcUXGD39JCes',
       {
         method: 'POST',
         headers: {
@@ -108,9 +110,17 @@ export const login = (email, password) => {
 };
 
 export const logout = () => {
-  clearLogoutTimer();
-  AsyncStorage.removeItem('userData');
-  return {type: LOGOUT};
+  return async (dispatch) => {
+    try {
+      clearLogoutTimer();
+      await AsyncStorage.removeItem('userData');
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch({
+      type: LOGOUT,
+    });
+  };
 };
 
 const clearLogoutTimer = () => {
@@ -127,13 +137,15 @@ const setLogoutTimer = (expirationTime) => {
   };
 };
 
-const saveDataToStorage = (token, userId, expirationDate) => {
-  AsyncStorage.setItem(
-    'userData',
-    JSON.stringify({
+const saveDataToStorage = async (token, userId, expirationDate) => {
+  try {
+    const jsonValue = JSON.stringify({
       token: token,
       userId: userId,
       expiryDate: expirationDate.toISOString(),
-    }),
-  );
+    });
+    await AsyncStorage.setItem('userData', jsonValue);
+  } catch (error) {
+    console.log(error);
+  }
 };
